@@ -76,6 +76,5 @@ module.exports = {
   fetchFuturesFundingRates,
   fetchSpotRates,
   fetchArbitrageOpportunities,
-  storeArbitrageOpportunity,
-  ArbitrageOpportunity,
+  storeArbitrageOpportunity
 };

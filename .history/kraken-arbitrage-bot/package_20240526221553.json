@@ -1,0 +1,15 @@
+{
+  "name": "kraken-arbitrage-bot",
+  "version": "1.0.0",
+  "scripts": {
+    "start-all": "concurrently \"npm run start-mongo\" \"npm run start-backend\" \"npm run start-frontend\"",
+    "start-mongo": "mongod --dbpath D:/mongodb/data/db",
+    "start-backend": "node ./backend/server.js",
+    "start-frontend": "npm run build-frontend && npm run serve-frontend",
+    "build-frontend": "cd ../arbitrage-bot-ui && npm run build",
+    "serve-frontend": "cd ../arbitrage-bot-ui && npx serve -s build"
+  },
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}

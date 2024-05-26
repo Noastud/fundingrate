@@ -16,7 +16,7 @@ const arbitrageOpportunitySchema = new mongoose.Schema({
   rateDifference: Number,
   opportunityDetails: String,
 });
-const ArbitrageOpportunity = mongoose.models.ArbitrageOpportunity || mongoose.model('ArbitrageOpportunity', arbitrageOpportunitySchema);
+const ArbitrageOpportunity = mongoose.model('ArbitrageOpportunity', arbitrageOpportunitySchema);
 
 
 async function fetchFuturesFundingRates() {
@@ -76,6 +76,5 @@ module.exports = {
   fetchFuturesFundingRates,
   fetchSpotRates,
   fetchArbitrageOpportunities,
-  storeArbitrageOpportunity,
-  ArbitrageOpportunity,
+  storeArbitrageOpportunity
 };

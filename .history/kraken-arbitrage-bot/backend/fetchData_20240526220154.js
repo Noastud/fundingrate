@@ -1,7 +1,6 @@
 const axios = require('axios');
-const { saveFundingRates, saveArbitrageOpportunities } = require('./database');
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { saveFundingRates, saveArbitrageOpportunities } = require('./database');
 
 const fundingRateSchema = new mongoose.Schema({
   timestamp: Date,
@@ -16,13 +15,13 @@ const arbitrageOpportunitySchema = new mongoose.Schema({
   rateDifference: Number,
   opportunityDetails: String,
 });
-const ArbitrageOpportunity = mongoose.models.ArbitrageOpportunity || mongoose.model('ArbitrageOpportunity', arbitrageOpportunitySchema);
+const ArbitrageOpportunity = mongoose.model('ArbitrageOpportunity', arbitrageOpportunitySchema);
 
 
 async function fetchFuturesFundingRates() {
   try {
     const response = await axios.get('https://api.kraken.com/0/public/FundingRates');
-    const fundingRates = response.data.result;
+    const fundingRates = response.data.result; // Anpassen an die tatsächliche API-Antwortstruktur
 
     const filteredRates = fundingRates.filter(rate => rate.symbol === 'BTCUSD');
     await saveFundingRates(filteredRates);
@@ -31,6 +30,7 @@ async function fetchFuturesFundingRates() {
   }
 }
 
+// Funktion zum Speichern einer Arbitrage-Gelegenheit
 async function storeArbitrageOpportunity(opportunity) {
   await saveArbitrageOpportunities(opportunity);
 }
@@ -76,6 +76,4 @@ module.exports = {
   fetchFuturesFundingRates,
   fetchSpotRates,
   fetchArbitrageOpportunities,
-  storeArbitrageOpportunity,
-  ArbitrageOpportunity,
 };
