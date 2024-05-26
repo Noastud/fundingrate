@@ -14,16 +14,6 @@ app.listen(3000, () => {
 });
 
 // Optionally, add endpoints to trigger data fetching or analysis
-app.get('/api/funding-rates', async (req, res) => {
-  const fundingRates = await FundingRate.find().sort({ timestamp: -1 }).limit(100);
-  res.json(fundingRates);
-});
-
-app.get('/api/arbitrage-opportunities', async (req, res) => {
-  const opportunities = await ArbitrageOpportunity.find().sort({ timestamp: -1 }).limit(100);
-  res.json(opportunities);
-});
-
 app.get('/fetchFundingRates', async (req, res) => {
   await fetchFuturesFundingRates();
   res.send('Funding rates fetched');

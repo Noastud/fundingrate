@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import FundingRates from './components/FundingRates';
 import ArbitrageOpportunities from './components/ArbitrageOpportunities';
 
@@ -15,23 +15,21 @@ function App() {
           </nav>
         </header>
         <div className="container">
-          <Routes>
-            <Route path="/funding-rates" element={<FundingRates />} />
-            <Route path="/arbitrage-opportunities" element={<ArbitrageOpportunities />} />
-            <Route path="/" element={<Home />} />
-          </Routes>
+          <Switch>
+            <Route path="/funding-rates">
+              <FundingRates />
+            </Route>
+            <Route path="/arbitrage-opportunities">
+              <ArbitrageOpportunities />
+            </Route>
+            <Route path="/">
+              <h2>Welcome to the Kraken Funding Rate Arbitrage Bot</h2>
+              <p>Select a view to see the data.</p>
+            </Route>
+          </Switch>
         </div>
       </div>
     </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Welcome to the Kraken Funding Rate Arbitrage Bot</h2>
-      <p>Select a view to see the data.</p>
-    </div>
   );
 }
 
