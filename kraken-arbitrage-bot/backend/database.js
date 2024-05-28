@@ -1,30 +1,17 @@
 const mongoose = require('mongoose');
+const logger = require('./logger');
 
-mongoose.connect('mongodb://localhost:27017/arbitrage', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const arbitrageOpportunitySchema = new mongoose.Schema({
-  timestamp: Date,
-  pair: String,
-  rateDifference: Number,
-  opportunityDetails: String,
-});
-
-const ArbitrageOpportunity = mongoose.model('ArbitrageOpportunity', arbitrageOpportunitySchema);
-
-async function saveFundingRates(fundingRates) {
-  console.log('Funding rates saved:', fundingRates);
-}
-
-async function saveArbitrageOpportunities(opportunity) {
-  const arbitrageOpportunity = new ArbitrageOpportunity(opportunity);
-  await arbitrageOpportunity.save();
-  console.log('Arbitrage opportunity saved:', opportunity);
-}
-
-module.exports = {
-  saveFundingRates,
-  saveArbitrageOpportunities,
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/arbitrageBot', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    logger.info('Connected to MongoDB', { location: 'connectDB', file: 'database.js' });
+  } catch (error) {
+    logger.error('Failed to connect to MongoDB', { location: 'connectDB', file: 'database.js', error: error.message });
+    process.exit(1);
+  }
 };
+
+module.exports = { connectDB };

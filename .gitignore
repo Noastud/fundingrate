@@ -1,1 +1,6 @@
+**/node_modules/
+
+.history
+/kraken-arbitrage-bot/node_modules
+/arbitrage-bot-ui/node_modules
 node_modules

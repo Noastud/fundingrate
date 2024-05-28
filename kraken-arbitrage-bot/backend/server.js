@@ -1,53 +1,109 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const { fetchFuturesFundingRates, fetchArbitrageOpportunities } = require('./fetchData');
-const analyzeArbitrage = require('./arbitrageLogic');
-const sendDiscordNotification = require('./discordBot');
-const FundingRate = require('./models/FundingRate'); // Importiere das FundingRate Modell
-const ArbitrageOpportunity = require('./models/ArbitrageOpportunity'); // Importiere das ArbitrageOpportunity Modell
+const { connectDB } = require('./database');
+const { saveFuturesData, saveSpotData, fetchMarketPricesAndSaveArbitrageOpportunities } = require('./fetchData');
+const Futures = require('./models/Futures');
+const Spot = require('./models/Spot');
+const ArbitrageOpportunity = require('./models/ArbitrageOpportunity');
+const logger = require('./logger');
 
+// Connect to MongoDB
+connectDB();
 const app = express();
-app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/arbitrageBot', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Failed to connect to MongoDB', err));
+app.use(express.json());
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+  logger.info('Server running on port 3000', { location: 'server.js', file: 'server.js' });
 });
 
-// Beispielroute zum Senden einer DM
-app.get('/sendNotification', async (req, res) => {
-  const userId = 'klimbamimbs'; // Ersetze durch die tatsächliche Benutzer-ID
-  const message = 'This is a test notification!';
-  await sendDiscordNotification(message, userId);
-  res.send('Notification sent');
-});
+// Rate limiting for logging
+let lastLogTimeFutures = 0;
+let lastLogTimeSpot = 0;
+const logInterval = 60000; // 1 minute
 
-// Optional: Endpunkte zum Auslösen des Datenabrufs oder der Analyse
-app.get('/api/funding-rates', async (req, res) => {
-  const fundingRates = await FundingRate.find().sort({ timestamp: -1 }).limit(100);
-  res.json(fundingRates);
-});
+setInterval(() => {
+  const currentTime = Date.now();
+  
+  if (currentTime - lastLogTimeFutures > logInterval) {
+    lastLogTimeFutures = currentTime;
+    logger.info('Saving futures data...', { location: 'setInterval', file: 'server.js' });
+  }
+  
+  saveFuturesData().catch(error => logger.error(`Error saving futures data: ${error.message}`, { location: 'setInterval', file: 'server.js' }));
+}, 60000); // Fetch and save futures data every minute
 
-app.get('/api/arbitrage-opportunities', async (req, res) => {
-  const opportunities = await ArbitrageOpportunity.find().sort({ timestamp: -1 }).limit(100);
-  res.json(opportunities);
-});
+setInterval(() => {
+  const currentTime = Date.now();
+  
+  if (currentTime - lastLogTimeSpot > logInterval) {
+    lastLogTimeSpot = currentTime;
+    logger.info('Saving spot data...', { location: 'setInterval', file: 'server.js' });
+  }
+  
+  saveSpotData().catch(error => logger.error(`Error saving spot data: ${error.message}`, { location: 'setInterval', file: 'server.js' }));
+}, 15000); // Fetch and save spot data every minute
 
 app.get('/fetchFundingRates', async (req, res) => {
-  await fetchFuturesFundingRates();
-  res.send('Funding rates fetched');
+  try {
+    logger.info('Fetching funding rates...', { location: 'fetchFundingRates', file: 'server.js' });
+    await saveFuturesData();
+    res.send('Funding rates fetched and saved');
+    logger.info('Funding rates fetched and saved successfully', { location: 'fetchFundingRates', file: 'server.js' });
+  } catch (error) {
+    logger.error(`Error fetching funding rates: ${error.message}`, { location: 'fetchFundingRates', file: 'server.js' });
+    res.status(500).send('Error fetching funding rates');
+  }
 });
 
-app.get('/fetchArbitrageOpportunities', async (req, res) => {
-  await fetchArbitrageOpportunities();
-  res.send('Arbitrage opportunities fetched');
+app.get('/fetchSpotRates', async (req, res) => {
+  try {
+    logger.info('Fetching spot rates...', { location: 'fetchSpotRates', file: 'server.js' });
+    await saveSpotData();
+    res.send('Spot rates fetched and saved');
+    logger.info('Spot rates fetched and saved successfully', { location: 'fetchSpotRates', file: 'server.js' });
+  } catch (error) {
+    logger.error(`Error fetching spot rates: ${error.message}`, { location: 'fetchSpotRates', file: 'server.js' });
+    res.status(500).send('Error fetching spot rates');
+  }
 });
 
-app.get('/analyzeArbitrage', async (req, res) => {
-  await analyzeArbitrage();
-  res.send('Arbitrage analysis complete');
+// New endpoint to fetch futures pairs
+app.get('/api/futures-pairs', async (req, res) => {
+  try {
+    logger.info('Fetching futures pairs...', { location: 'api/futures-pairs', file: 'server.js' });
+    const pairs = await Futures.find({});
+    res.json(pairs);
+    logger.info('Futures pairs fetched successfully', { location: 'api/futures-pairs', file: 'server.js' });
+  } catch (error) {
+    logger.error(`Error fetching futures pairs: ${error.message}`, { location: 'api/futures-pairs', file: 'server.js' });
+    res.status(500).send('Error fetching futures pairs');
+  }
 });
+
+// New endpoint to fetch spot pairs
+app.get('/api/spot-pairs', async (req, res) => {
+  try {
+    logger.info('Fetching spot pairs...', { location: 'api/spot-pairs', file: 'server.js' });
+    const pairs = await Spot.find({});
+    res.json(pairs);
+    logger.info('Spot pairs fetched successfully', { location: 'api/spot-pairs', file: 'server.js' });
+  } catch (error) {
+    logger.error(`Error fetching spot pairs: ${error.message}`, { location: 'api/spot-pairs', file: 'server.js' });
+    res.status(500).send('Error fetching spot pairs');
+  }
+});
+
+// Endpoint to fetch funding rates
+app.get('/api/funding-rates', async (req, res) => {
+  try {
+    logger.info('Fetching funding rates...', { location: 'api/funding-rates', file: 'server.js' });
+    const rates = await ArbitrageOpportunity.find({});
+    res.json(rates);
+    logger.info('Funding rates fetched successfully', { location: 'api/funding-rates', file: 'server.js' });
+  } catch (error) {
+    logger.error(`Error fetching funding rates: ${error.message}`, { location: 'api/funding-rates', file: 'server.js' });
+    res.status(500).send('Error fetching funding rates');
+  }
+});
+
+module.exports = app;
