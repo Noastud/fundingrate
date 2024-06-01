@@ -11,6 +11,7 @@
     "axios": "^1.7.2",
     "concurrently": "^6.2.0",
     "debug": "^4.3.4",
+    "dotenv": "^16.4.5",
     "express-winston": "^4.2.0",
     "react-router-dom": "^6.23.1",
     "web-vitals": "^4.0.1",

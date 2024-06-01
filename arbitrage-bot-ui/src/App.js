@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import FundingRates from './components/FundingRates';
 import ArbitrageOpportunities from './components/ArbitrageOpportunities';
 import PairsDisplay from './components/PairsDisplay';
+require('dotenv').config();
 
 function App() {
     return (

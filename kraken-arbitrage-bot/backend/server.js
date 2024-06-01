@@ -5,6 +5,7 @@ const Futures = require('./models/Futures');
 const Spot = require('./models/Spot');
 const ArbitrageOpportunity = require('./models/ArbitrageOpportunity');
 const logger = require('./logger');
+require('dotenv').config();
 
 // Connect to MongoDB
 connectDB();

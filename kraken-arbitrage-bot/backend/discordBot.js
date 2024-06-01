@@ -1,4 +1,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
+require('dotenv').config();
+const express = require('express');
+const Discordke = process.env.DISOCRD_KEY;
 
 const client = new Client({
     intents: [

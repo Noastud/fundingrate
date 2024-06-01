@@ -3,7 +3,7 @@ const ArbitrageOpportunity = require('./models/ArbitrageOpportunity');
 const Futures = require('./models/Futures');
 const Spot = require('./models/Spot');
 const logger = require('./logger');
-
+/*
 function fetchFuturesTickers() {
   return new Promise((resolve, reject) => {
     const options = {
@@ -204,8 +204,8 @@ module.exports = {
   fetchSpotPrice,
   saveSpotData,
   fetchMarketPricesAndSaveArbitrageOpportunities,
-};
-/*// File: fetchData.js
+};*/
+// File: fetchData.js
 
 const fs = require('fs');
 const axios = require('axios');
@@ -225,24 +225,7 @@ const FuturesDataSchema = new mongoose.Schema({
 const SpotData = mongoose.model('SpotData', SpotDataSchema);
 const FuturesData = mongoose.model('FuturesData', FuturesDataSchema);
 
-// Logging function
-const log = (message, metadata) => {
-    const logMessage = `${new Date().toISOString()} [INFO]: ${message} ${JSON.stringify(metadata)}`;
-    console.log(logMessage);
-    fs.appendFileSync('logs.txt', logMessage + '\n');
-};
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb://localhost:27017/trading_data', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        log('Connected to MongoDB', { location: 'connectDB', file: 'fetchData.js' });
-    } catch (error) {
-        log('Error connecting to MongoDB', { location: 'connectDB', file: 'fetchData.js', error: error.message });
-    }
-};
 
 const fetchTradingPairs = async () => {
     try {
@@ -310,4 +293,3 @@ const main = async () => {
 main().catch(error => {
     log('Error in main function', { location: 'main', file: 'fetchData.js', error: error.message });
 });
-*/
