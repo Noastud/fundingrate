@@ -1,14 +1,14 @@
 {
   "name": "kraken-arbitrage-bot",
   "version": "1.0.0",
+  "description": "Kraken arbitrage bot",
+  "main": "backend/discordBot.js",
   "scripts": {
-    "start-backend": "node backend/server.js"
+    "start": "node backend/discordBot.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "dotenv": "^16.4.5",
-    "express": "^4.17.1",
-    "follow-redirects": "^1.14.0",
-    "mongoose": "^5.11.15"
+    "discord.js": "^14.15.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
   }
 }
