@@ -274,10 +274,11 @@ const saveSpotData = async (pair, data) => {
 const saveFuturesData = async (pair, data) => {
     try {
         const futuresData = new FuturesData({ pair, data });
+        console.table(futuresData);
         await futuresData.save();
         log(`Futures data saved for pair: ${pair}`, { location: 'saveFuturesData', file: 'fetchData.js', pair });
     } catch (error) {
-        log(`Error saving futures data`, { location: 'saveFuturesData', file: 'fetchData.js', pair, error: error.message });
+        logger.error(`Error saving futures data`, { location: 'saveFuturesData', file: 'fetchData.js', pair, error: error.message });
     }
 };
 
