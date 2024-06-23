@@ -1,4 +1,3 @@
-// /backend/server.js
 const express = require('express');
 const { connectDB } = require('./database');
 const fetchData = require('./fetchData');
@@ -22,8 +21,8 @@ const futuresRoutes = require('./routes/futuresRoutes');
 const spotRoutes = require('./routes/spotRoutes');
 const arbitrageRoutes = require('./routes/arbitrageRoutes');
 
-app.use('/api/futures', futuresRoutes);
-app.use('/api/spot', spotRoutes);
-app.use('/api/arbitrage', arbitrageRoutes);
+app.use('/futures', futuresRoutes);
+app.use('/spot', spotRoutes);
+app.use('/arbitrage', arbitrageRoutes);
 
 module.exports = app;

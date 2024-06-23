@@ -1,0 +1,22 @@
+2024-06-23T19:14:11.096Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:14:11.114Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:14:35.527Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:14:35.546Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:15:42.333Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:15:42.349Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:16:08.705Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:16:08.723Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:21:00.839Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:21:00.873Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:24:01.914Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:24:01.940Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:27:00.051Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:27:00.085Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:30:36.203Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:30:36.274Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:31:43.783Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:31:43.803Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:37:32.831Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:37:32.855Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}
+2024-06-23T19:46:16.548Z [INFO]: Server running on port 3000 {"location":"server.js"}
+2024-06-23T19:46:16.569Z [INFO]: Connected to MongoDB {"location":"connectDB","file":"database.js"}

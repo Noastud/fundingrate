@@ -2,10 +2,10 @@
   "name": "fundingrate",
   "version": "1.0.0",
   "scripts": {
+    "start-backend": "cd Backend && npm run start-backend",
+    "start-frontend": "cd frontend && npm run start",
     "start-mongo": "mongod --dbpath D:/mongodb/data/db",
-    "start-backend": "cd kraken-arbitrage-bot && npm run start-backend",
-    "start-frontend": "cd arbitrage-bot-ui && npm run start-frontend",
-    "start-all": "concurrently \"npm run start-mongo\" \"npm run start-backend\" \"npm run start-frontend\""
+    "start-all": "concurrently \"npm run start-backend\" \"npm run start-frontend\" \"npm run start-mongo\""
   },
   "dependencies": {
     "axios": "^1.7.2",
@@ -20,6 +20,8 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
-    "nock": "^13.5.4"
+    "nock": "^13.5.4",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1"
   }
 }

@@ -1,12 +1,14 @@
 {
-  "name": "kraken-arbitrage-bot",
+  "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start-backend": "node backend/server.js"
+    "start-backend": "node Server/server.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "backend": "^0.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "follow-redirects": "^1.14.0",
     "mongoose": "^5.11.15"
