@@ -3,14 +3,14 @@ const logger = require('./logger');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/arbitrageBot', {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/arbitrageBot', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    logger.info('Connected to MongoDB', { location: 'connectDB', file: 'database.js' });
+    logger.info('MongoDB connected');
   } catch (error) {
-    logger.error('Failed to connect to MongoDB', { location: 'connectDB', file: 'database.js', error: error.message });
-    process.exit(1);
+    logger.error('MongoDB connection error', { error: error.message });
+    throw error;
   }
 };
 

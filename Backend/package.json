@@ -11,6 +11,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "follow-redirects": "^1.14.0",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.11.15",
+    "node-cron": "^3.0.3"
   }
 }

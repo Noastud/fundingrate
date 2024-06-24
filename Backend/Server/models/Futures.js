@@ -6,6 +6,7 @@ const futuresSchema = new mongoose.Schema({
   symbol: String,
   price: Number,
   fundingRate: Number,
+  volume: Number,
 });
 
 module.exports = mongoose.models.Futures || mongoose.model('Futures', futuresSchema);
