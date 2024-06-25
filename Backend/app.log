@@ -1,0 +1,60 @@
+$2024-06-25T10:27:14.952Z [INFO]: Server running on port 3001 {"location":"server.js"}
+2024-06-25T10:27:14.993Z [INFO]: MongoDB connected
+2024-06-25T10:27:14.994Z [INFO]: Connected to MongoDB
+2024-06-25T10:27:15.066Z [INFO]: Fetching spot price for ALT:USD {"location":"fetchSpotPrice","pair":"ALT:USD"}
+2024-06-25T10:27:15.073Z [INFO]: Fetching spot price for ALT/USD {"location":"fetchSpotPrice","pair":"ALT/USD"}
+2024-06-25T10:27:15.098Z [INFO]: Fetched futures tickers success
+2024-06-25T10:27:15.101Z [INFO]: Tickers data saved to tickers.json
+2024-06-25T10:27:15.105Z [INFO]: Fetched futures tickers success
+2024-06-25T10:27:15.108Z [INFO]: Tickers data saved to tickers.json
+2024-06-25T10:27:15.143Z [INFO]: Fetched futures tickers success
+2024-06-25T10:27:15.146Z [INFO]: Tickers data saved to tickers.json
+2024-06-25T10:27:15.158Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"WLD:USD"}
+2024-06-25T10:27:15.164Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ENS:USD"}
+2024-06-25T10:27:15.168Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"AVAX:USD"}
+2024-06-25T10:27:15.173Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ORDI:USD"}
+2024-06-25T10:27:15.176Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"STX:USD"}
+2024-06-25T10:27:15.180Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"GAL:USD"}
+2024-06-25T10:27:15.184Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"AAVE:USD"}
+2024-06-25T10:27:15.188Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"DYDX:USD"}
+2024-06-25T10:27:15.191Z [INFO]: Fetched spot price for ALT:USD {"location":"fetchSpotPrice","data":"{\"error\":[],\"result\":{\"ALT/USD\":{\"a\":[\"0.18900000\",\"103\",\"103.000\"],\"b\":[\"0.18400000\",\"81\",\"81.000\"],\"c\":[\"0.18950000\",\"82.18100\"],\"v\":[\"75458.27780\",\"75770.07680\"],\"p\":[\"0.18839842\",\"0.18837399\"],\"t\":[79,82],\"l\":[\"0.18770000\",\"0.18130000\"],\"h\":[\"0.19510000\",\"0.19510000\"],\"o\":\"0.19200000\"}}}"}
+2024-06-25T10:27:15.198Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"HNT:USD"}
+2024-06-25T10:27:15.204Z [INFO]: Spot data saved for pair: ALT:USD {"location":"saveSpotData","pair":"ALT:USD"}
+2024-06-25T10:27:15.204Z [INFO]: Fetching spot price for ORDI:USD {"location":"fetchSpotPrice","pair":"ORDI:USD"}
+2024-06-25T10:27:15.207Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"FXS:USD"}
+2024-06-25T10:27:15.210Z [INFO]: Fetched spot price for ALT/USD {"location":"fetchSpotPrice","data":"{\"error\":[],\"result\":{\"ALT/USD\":{\"a\":[\"0.18900000\",\"103\",\"103.000\"],\"b\":[\"0.18400000\",\"81\",\"81.000\"],\"c\":[\"0.18950000\",\"82.18100\"],\"v\":[\"75458.27780\",\"75770.07680\"],\"p\":[\"0.18839842\",\"0.18837399\"],\"t\":[79,82],\"l\":[\"0.18770000\",\"0.18130000\"],\"h\":[\"0.19510000\",\"0.19510000\"],\"o\":\"0.19200000\"}}}"}
+2024-06-25T10:27:15.215Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"XBT:USD"}
+2024-06-25T10:27:15.233Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"IMX:USD"}
+2024-06-25T10:27:15.236Z [INFO]: Arbitrage opportunity created for pair: ALT:USD {"location":"fetchMarketPricesAndSaveArbitrageOpportunities","pair":"ALT:USD"}
+2024-06-25T10:27:15.237Z [INFO]: Fetching spot price for ORDI/USD {"location":"fetchSpotPrice","pair":"ORDI/USD"}
+2024-06-25T10:27:15.238Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"XRP:USD"}
+2024-06-25T10:27:15.241Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"PERP:USD"}
+2024-06-25T10:27:15.243Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"LPT:USD"}
+2024-06-25T10:27:15.246Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"RNDR:USD"}
+2024-06-25T10:27:15.249Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"COMP:USD"}
+2024-06-25T10:27:15.252Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"BAND:USD"}
+2024-06-25T10:27:15.255Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ETC:USD"}
+2024-06-25T10:27:15.256Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"FIL:USD"}
+2024-06-25T10:27:15.258Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"UMA:USD"}
+2024-06-25T10:27:15.260Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ETH:USD"}
+2024-06-25T10:27:15.262Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ICP:USD"}
+2024-06-25T10:27:15.265Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"LDO:USD"}
+2024-06-25T10:27:15.266Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"LSK:USD"}
+2024-06-25T10:27:15.269Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ANT:USD"}
+2024-06-25T10:27:15.272Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ONDO:USD"}
+2024-06-25T10:27:15.275Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"WAVES:USD"}
+2024-06-25T10:27:15.277Z [ERROR]: Error fetching spot price {"location":"fetchSpotPrice","pair":"ORDI:USD","error":["EQuery:Unknown asset pair"]}
+2024-06-25T10:27:15.278Z [ERROR]: Error saving spot data {"location":"saveSpotData"}
+2024-06-25T10:27:15.279Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"POPCAT:USD"}
+2024-06-25T10:27:15.284Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"QTUM:USD"}
+2024-06-25T10:27:15.286Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"TON:USD"}
+2024-06-25T10:27:15.288Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"QNT:USD"}
+2024-06-25T10:27:15.290Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"TRB:USD"}
+2024-06-25T10:27:15.292Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"ATOM:USD"}
+2024-06-25T10:27:15.294Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"BADGER:USD"}
+2024-06-25T10:27:15.296Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"OP:USD"}
+2024-06-25T10:27:15.298Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"DASH:USD"}
+2024-06-25T10:27:15.301Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"RUNE:USD"}
+2024-06-25T10:27:15.304Z [INFO]: Futures data saved {"location":"saveFuturesData","pair":"BNB:USD"}
+2024-06-25T10:27:15.360Z [ERROR]: Error fetching spot price {"location":"fetchSpotPrice","pair":"ORDI/USD","error":["EQuery:Unknown asset pair"]}
+2024-06-25T10:27:15.360Z [ERROR]: Error saving arbitrage opportunities {"location":"fetchMarketPricesAndSaveArbitrageOpportunities"}

@@ -4,6 +4,8 @@ const Futures = require('./models/Futures');
 const Spot = require('./models/Spot');
 const ArbitrageOpportunity = require('./models/ArbitrageOpportunity');
 const logger = require('./logger'); // Ensure logger is correctly configured and imported
+const fs = require('fs');
+const path = require('path');
 
 function fetchFuturesTickers() {
   return new Promise((resolve, reject) => {
@@ -18,19 +20,20 @@ function fetchFuturesTickers() {
     };
 
     const req = https.request(options, (res) => {
-      let chunks = [];
+      let body = '';
 
       res.on('data', (chunk) => {
-        chunks.push(chunk);
+        body += chunk;
       });
 
       res.on('end', () => {
-        const body = Buffer.concat(chunks).toString();
-        logger.info('Fetched futures tickers', { location: 'fetchFuturesTickers', data: body });
+        logger.info(`Fetched futures tickers ${res.statusCode === 200 ? 'success' : 'failed'}`);
         try {
           const tickers = JSON.parse(body).tickers;
-          // Filter tickers based on vol24h and fundingRate
-          const filteredTickers = tickers.filter(ticker => ticker.vol24h > 12000 && ticker.fundingRate > 0.00015);
+          const filteredTickers = tickers.filter(ticker => ticker.vol24h > 1 && ticker.fundingRate > 0.0000157991167720991);
+          const filePath = path.join(__dirname, 'tickers.json');
+          fs.writeFileSync(filePath, JSON.stringify(filteredTickers, null, 2));
+          logger.info('Tickers data saved to tickers.json');
           resolve(filteredTickers);
         } catch (error) {
           logger.error('Error parsing JSON response', { location: 'fetchFuturesTickers', error: error.message });
@@ -48,14 +51,17 @@ function fetchFuturesTickers() {
   });
 }
 
-// Usage example for fetching futures tickers
+// Usage
 fetchFuturesTickers()
-  .then(filteredTickers => {
-    console.log(filteredTickers);
+  .then(() => {
+    console.log('Tickers data saved to JSON file.');
   })
   .catch(error => {
     console.error('Error:', error);
   });
+
+
+// Usage example for fetching futures tickers
 
 async function saveFuturesData() {
   try {
@@ -185,6 +191,11 @@ async function fetchMarketPricesAndSaveArbitrageOpportunities() {
         continue;
       }
 
+      if (spotData.result[pairKey].a.length === 0 || spotData.result[pairKey].b.length === 0) {
+        logger.warn(`Spot coin not available for pair: ${future.pair}`, { location: 'fetchMarketPricesAndSaveArbitrageOpportunities', pair: future.pair });
+        continue;
+      }
+
       const discrepancyAbsolute = futurePrice - spotPrice;
       const discrepancyRelative = ((futurePrice - spotPrice) / spotPrice) * 100;
       const fundingRate = parseFloat(future.fundingRate);
@@ -204,13 +215,32 @@ async function fetchMarketPricesAndSaveArbitrageOpportunities() {
         timestamp: new Date(),
       };
 
-      await ArbitrageOpportunity.create(arbitrageOpportunity);
-      logger.info(`Arbitrage opportunity saved for pair: ${future.pair}`, { location: 'fetchMarketPricesAndSaveArbitrageOpportunities', pair: future.pair });
+      const existingOpportunity = await ArbitrageOpportunity.findOne({ pair: future.pair });
+      if (existingOpportunity) {
+        await ArbitrageOpportunity.updateOne({ pair: future.pair }, arbitrageOpportunity);
+        logger.info(`Arbitrage opportunity updated for pair: ${future.pair}`, { location: 'fetchMarketPricesAndSaveArbitrageOpportunities', pair: future.pair });
+      } else {
+        await ArbitrageOpportunity.create(arbitrageOpportunity);
+        logger.info(`Arbitrage opportunity created for pair: ${future.pair}`, { location: 'fetchMarketPricesAndSaveArbitrageOpportunities', pair: future.pair });
+      }
     }
   } catch (error) {
     logger.error('Error saving arbitrage opportunities', { location: 'fetchMarketPricesAndSaveArbitrageOpportunities', error: error.message });
   }
 }
+
+// Chain the functions to process everything sequentially
+fetchFuturesTickers()
+  .then(() => saveFuturesDataFromJson())
+  .then(() => saveSpotData())
+  .then(() => fetchMarketPricesAndSaveArbitrageOpportunities())
+  .then(() => {
+    console.log('All data processed successfully.');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
 
 module.exports = {
   fetchFuturesTickers,
